@@ -39,6 +39,7 @@
     zenburn-theme
     rvm
     ansi-color
+    smooth-scrolling
     rainbow-mode) "a list of required packages at launch")
 
 (require 'cl)
@@ -104,8 +105,15 @@
 ;; Prefer utf-8 encoding
 (prefer-coding-system 'utf-8)
 
+;; show annoying trailing whitespace
+(setq show-trailing-whitespace t)
+
 ;; Scroll with output of rake test etc
 (setq compilation-scroll-output t)
+
+;; Shortcut to align = vertically
+(fset 'align-equals "\C-[xalign-regex\C-m=\C-m")
+(global-set-key "\M-=" 'align-equals)
 
 ;; Use windmove bindings
 ;; Navigate between windows using Alt-1, Alt-2, Shift-left, shift-up, shift-right
@@ -178,8 +186,8 @@ point reaches the beginning or end of the buffer, stop there."
 (add-hook 'js-mode-hook
           (lambda () (flycheck-mode t)))
 (set-face-attribute 'flycheck-error nil :background "DarkRed" :underline nil)
-(set-face-attribute 'flycheck-warning nil :background "orange4" :underline: nil)
-(set-face-attribute 'flycheck-info nil :underline: t)
+(set-face-attribute 'flycheck-warning nil :background "orange4" :underline nil)
+(set-face-attribute 'flycheck-info nil :underline t)
 
 ;; ruby mode
 (add-hook 'ruby-mode-hook
@@ -250,3 +258,6 @@ point reaches the beginning or end of the buffer, stop there."
       (ansi-color-apply-on-region (point-min) (point-max))
       (toggle-read-only)))
   (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
+
+;; smooth-scrolling
+(require 'smooth-scrolling)
