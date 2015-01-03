@@ -79,6 +79,7 @@
 
 ;; Use zenburn theme
 (load-theme 'zenburn t)
+(set-face-attribute 'region nil :background "#1a4244")
 
 ;; Switch off menubar, scrollbar and toolbar and the startup message
 (scroll-bar-mode -1)
@@ -110,10 +111,6 @@
 ;; Navigate between windows using Alt-1, Alt-2, Shift-left, shift-up, shift-right
 (windmove-default-keybindings)
 
-(set-cursor-color "red")
-
-(setq default-frame-alist
-      '((cursor-color . "red")))
 
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
@@ -180,6 +177,9 @@ point reaches the beginning or end of the buffer, stop there."
 (require 'flycheck)
 (add-hook 'js-mode-hook
           (lambda () (flycheck-mode t)))
+(set-face-attribute 'flycheck-error nil :background "DarkRed" :underline nil)
+(set-face-attribute 'flycheck-warning nil :background "orange4" :underline: nil)
+(set-face-attribute 'flycheck-info nil :underline: t)
 
 ;; ruby mode
 (add-hook 'ruby-mode-hook
