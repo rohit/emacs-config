@@ -25,6 +25,7 @@
     robe
     rspec-mode
     yasnippet
+    flx-ido
     clojure-mode
     coffee-mode
     haml-mode
@@ -33,9 +34,11 @@
     ledger-mode
     flycheck
     web-mode
+    ace-jump-mode
     expand-region
     zenburn-theme
     rvm
+    ansi-color
     rainbow-mode) "a list of required packages at launch")
 
 (require 'cl)
@@ -99,6 +102,9 @@
 
 ;; Prefer utf-8 encoding
 (prefer-coding-system 'utf-8)
+
+;; Scroll with output of rake test etc
+(setq compilation-scroll-output t)
 
 ;; Use windmove bindings
 ;; Navigate between windows using Alt-1, Alt-2, Shift-left, shift-up, shift-right
@@ -175,8 +181,14 @@ point reaches the beginning or end of the buffer, stop there."
 (add-hook 'js-mode-hook
           (lambda () (flycheck-mode t)))
 
+;; ruby mode
 (add-hook 'ruby-mode-hook
           (lambda () (flycheck-mode t)))
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 
 
 ;; rspec-mode
@@ -210,3 +222,31 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; Set defcustom settings
 (custom-set-variables '(ledger-highlight-xact-under-point t))
+
+;; flx-ido
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+
+;; ace-jump-mode
+(require 'ace-jump-mode)
+(define-key global-map (kbd "C-c C-j") 'ace-jump-mode)
+
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+
+;; Setup ansi-color
+(require 'ansi-color)
+;; The hook to have rake spec output colorized was hard to find
+;; don't delete!
+;; http://stackoverflow.com/a/20788623
+(ignore-errors
+  (require 'ansi-color)
+  (defun my-colorize-compilation-buffer ()
+    (when (eq major-mode 'compilation-mode)
+      (toggle-read-only)
+      (ansi-color-apply-on-region (point-min) (point-max))
+      (toggle-read-only)))
+  (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
