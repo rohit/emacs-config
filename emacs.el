@@ -40,6 +40,7 @@
     rvm
     ansi-color
     smooth-scrolling
+    smartparens
     rainbow-mode) "a list of required packages at launch")
 
 (require 'cl)
@@ -261,3 +262,8 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; smooth-scrolling
 (require 'smooth-scrolling)
+
+;; smartparens
+(require 'smartparens-config)
+(smartparens-global-mode t)
+(show-smartparens-global-mode t)
