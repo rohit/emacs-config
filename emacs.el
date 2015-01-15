@@ -267,3 +267,6 @@ point reaches the beginning or end of the buffer, stop there."
 (require 'smartparens-config)
 (smartparens-global-mode t)
 (show-smartparens-global-mode t)
+
+;; ledger-mode
+(add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode))
