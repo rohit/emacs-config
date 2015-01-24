@@ -30,6 +30,8 @@
     coffee-mode
     haml-mode
     sass-mode
+    handlebars-mode
+    nodejs-repl
     feature-mode
     ledger-mode
     flycheck
@@ -120,6 +122,9 @@
 ;; Navigate between windows using Alt-1, Alt-2, Shift-left, shift-up, shift-right
 (windmove-default-keybindings)
 
+;; show key chords quickly
+(setq echo-keystroke 0.1)
+
 
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
@@ -205,6 +210,8 @@ point reaches the beginning or end of the buffer, stop there."
 
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
@@ -270,3 +277,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; ledger-mode
 (add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode))
+
+;; nodejs-repl
+(require 'nodejs-repl)
+(put 'erase-buffer 'disabled nil)
