@@ -31,6 +31,7 @@
     haml-mode
     sass-mode
     handlebars-mode
+    markdown-mode
     nodejs-repl
     feature-mode
     ledger-mode
