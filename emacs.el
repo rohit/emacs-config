@@ -33,6 +33,9 @@
     handlebars-mode
     markdown-mode
     nodejs-repl
+    js2-mode
+    tern
+    tern-auto-complete
     feature-mode
     ledger-mode
     flycheck
@@ -192,6 +195,7 @@ point reaches the beginning or end of the buffer, stop there."
 (require 'flycheck)
 (add-hook 'js-mode-hook
           (lambda () (flycheck-mode t)))
+(add-hook 'js2-mode-hook flycheck-mode)
 (set-face-attribute 'flycheck-error nil :background "DarkRed" :underline nil)
 (set-face-attribute 'flycheck-warning nil :background "orange4" :underline nil)
 (set-face-attribute 'flycheck-info nil :underline t)
@@ -282,3 +286,13 @@ point reaches the beginning or end of the buffer, stop there."
 ;; nodejs-repl
 (require 'nodejs-repl)
 (put 'erase-buffer 'disabled nil)
+
+;; js2-mode
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+;; tern mode
+(add-hook `js2-mode-hook (lambda () (tern-mode t)))
+(eval-after-load `tern
+  `(progn
+     (require `tern-auto-complete)
+     (tern-ac-setup)))
