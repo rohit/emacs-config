@@ -165,10 +165,11 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; Auto Complete
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20141228.633/dict/")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20150218.819/dict")
 (ac-config-default)
+(setq ac-quick-help-delay 1)
 
-;; Cucumber mode
+;; cucumber mode
 (require 'feature-mode)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
@@ -213,10 +214,16 @@ point reaches the beginning or end of the buffer, stop there."
 ;; rspec-mode
 (require 'rspec-mode)
 
+;; Web Mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+
+;; CSS property completion not working with latest web mode and auto complete
+;; Using CSS mode for time being
+(eval-after-load 'auto-complete
+  (dolist (hook '(css-mode-hook sass-mode-hook))
+    (add-hook hook 'ac-css-mode-setup)))
 
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
