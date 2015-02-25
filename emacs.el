@@ -22,6 +22,8 @@
 (defvar required-packages
   '(auto-complete
     projectile
+    ruby-mode
+    yaml-mode
     robe
     rspec-mode
     yasnippet
@@ -34,6 +36,7 @@
     markdown-mode
     nodejs-repl
     js2-mode
+    json-mode
     tern
     tern-auto-complete
     feature-mode
@@ -165,9 +168,10 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; Auto Complete
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20150218.819/dict")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20150225.715/dict/")
 (ac-config-default)
 (setq ac-quick-help-delay 1)
+(setq-default ac-dwim nil) ; To get pop-ups with docs even if a word is uniquely completed
 
 ;; cucumber mode
 (require 'feature-mode)
@@ -303,3 +307,12 @@ point reaches the beginning or end of the buffer, stop there."
   `(progn
      (require `tern-auto-complete)
      (tern-ac-setup)))
+
+;; yaml mode
+(require 'yaml-mode)
+
+;; ruby mode from melpa
+(require 'ruby-mode)
+
+;; json mode
+(require 'json-mode)
