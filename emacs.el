@@ -50,6 +50,7 @@
     ansi-color
     smooth-scrolling
     smartparens
+    color-theme-solarized
     rainbow-mode) "a list of required packages at launch")
 
 (require 'cl)
@@ -85,11 +86,11 @@
 
 ;; Highlight current line
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "#444")
+(set-face-background 'hl-line "#eee8d5")
 (set-face-underline 'hl-line nil)
 
 ;; Use zenburn theme
-(load-theme 'zenburn t)
+(load-theme 'solarized t)
 (set-face-attribute 'region nil :background "#1a4244")
 
 ;; Switch off menubar, scrollbar and toolbar and the startup message
