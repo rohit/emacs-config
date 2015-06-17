@@ -29,6 +29,9 @@
     yasnippet
     flx-ido
     clojure-mode
+    elixir-mode
+    company
+    alchemist
     coffee-mode
     haml-mode
     sass-mode
@@ -202,8 +205,8 @@ point reaches the beginning or end of the buffer, stop there."
 (add-hook 'js-mode-hook
           (lambda () (flycheck-mode t)))
 (add-hook 'js2-mode-hook flycheck-mode)
-(set-face-attribute 'flycheck-error nil :background "DarkRed" :underline nil)
-(set-face-attribute 'flycheck-warning nil :background "orange4" :underline nil)
+;; (set-face-attribute 'flycheck-error nil :background "DarkRed" :underline nil)
+;; (set-face-attribute 'flycheck-warning nil :background "orange4" :underline nil)
 (set-face-attribute 'flycheck-info nil :underline t)
 
 ;; ruby mode
@@ -317,3 +320,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; json mode
 (require 'json-mode)
+
+;; Elixir
+(add-hook 'elixir-mode-hook (lambda () (company-mode t)))
+(add-hook 'elixir-mode-hook (lambda () (alchemist-mode t)))
